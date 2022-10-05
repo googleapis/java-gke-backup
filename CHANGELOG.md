@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/googleapis/java-gke-backup/compare/v0.2.5...v0.2.6) (2022-10-05)
+
+
+### Bug Fixes
+
+* update protobuf to v3.21.7 ([1c41db9](https://github.com/googleapis/java-gke-backup/commit/1c41db94a6c9ea82101966675567d6792ee27c1c))
+
 ## [0.2.5](https://github.com/googleapis/java-gke-backup/compare/v0.2.4...v0.2.5) (2022-10-03)
 
 
