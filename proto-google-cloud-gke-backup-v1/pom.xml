@@ -10,7 +10,7 @@
   <parent>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-gke-backup-parent</artifactId>
-    <version>0.2.7-SNAPSHOT</version><!-- {x-version-update:google-cloud-gke-backup:current} -->
+    <version>0.3.0</version><!-- {x-version-update:google-cloud-gke-backup:current} -->
   </parent>
   <dependencies>
     <dependency>
