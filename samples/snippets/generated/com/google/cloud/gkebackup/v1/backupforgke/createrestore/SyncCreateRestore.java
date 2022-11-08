@@ -14,33 +14,35 @@
  * limitations under the License.
  */
 
-package com.google.cloud.gkebackup.v1.stub.samples;
+package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKEStubSettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.stub.BackupForGKEStubSettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_CreateRestore_sync]
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.CreateRestoreRequest;
+import com.google.cloud.gkebackup.v1.Restore;
+import com.google.cloud.gkebackup.v1.RestorePlanName;
 
-public class SyncGetBackupPlan {
+public class SyncCreateRestore {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    syncCreateRestore();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void syncCreateRestore() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKEStubSettings.Builder backupForGKESettingsBuilder =
-        BackupForGKEStubSettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKEStubSettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      CreateRestoreRequest request =
+          CreateRestoreRequest.newBuilder()
+              .setParent(RestorePlanName.of("[PROJECT]", "[LOCATION]", "[RESTORE_PLAN]").toString())
+              .setRestore(Restore.newBuilder().build())
+              .setRestoreId("restoreId-1845465015")
+              .build();
+      Restore response = backupForGKEClient.createRestoreAsync(request).get();
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKEStubSettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_CreateRestore_sync]

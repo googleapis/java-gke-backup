@@ -16,30 +16,37 @@
 
 package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.BackupForGKESettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_DeleteRestorePlan_async]
+import com.google.api.core.ApiFuture;
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.DeleteRestorePlanRequest;
+import com.google.cloud.gkebackup.v1.RestorePlanName;
+import com.google.longrunning.Operation;
 
-public class SyncGetBackupPlan {
+public class AsyncDeleteRestorePlan {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    asyncDeleteRestorePlan();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void asyncDeleteRestorePlan() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKESettings.Builder backupForGKESettingsBuilder = BackupForGKESettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKESettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      DeleteRestorePlanRequest request =
+          DeleteRestorePlanRequest.newBuilder()
+              .setName(RestorePlanName.of("[PROJECT]", "[LOCATION]", "[RESTORE_PLAN]").toString())
+              .setEtag("etag3123477")
+              .setForce(true)
+              .build();
+      ApiFuture<Operation> future =
+          backupForGKEClient.deleteRestorePlanCallable().futureCall(request);
+      // Do something.
+      future.get();
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_DeleteRestorePlan_async]

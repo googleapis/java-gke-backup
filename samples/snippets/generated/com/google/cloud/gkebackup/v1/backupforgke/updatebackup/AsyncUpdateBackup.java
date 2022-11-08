@@ -14,33 +14,38 @@
  * limitations under the License.
  */
 
-package com.google.cloud.gkebackup.v1.stub.samples;
+package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKEStubSettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.stub.BackupForGKEStubSettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_UpdateBackup_async]
+import com.google.api.core.ApiFuture;
+import com.google.cloud.gkebackup.v1.Backup;
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.UpdateBackupRequest;
+import com.google.longrunning.Operation;
+import com.google.protobuf.FieldMask;
 
-public class SyncGetBackupPlan {
+public class AsyncUpdateBackup {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    asyncUpdateBackup();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void asyncUpdateBackup() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKEStubSettings.Builder backupForGKESettingsBuilder =
-        BackupForGKEStubSettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKEStubSettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      UpdateBackupRequest request =
+          UpdateBackupRequest.newBuilder()
+              .setBackup(Backup.newBuilder().build())
+              .setUpdateMask(FieldMask.newBuilder().build())
+              .build();
+      ApiFuture<Operation> future = backupForGKEClient.updateBackupCallable().futureCall(request);
+      // Do something.
+      Operation response = future.get();
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKEStubSettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_UpdateBackup_async]

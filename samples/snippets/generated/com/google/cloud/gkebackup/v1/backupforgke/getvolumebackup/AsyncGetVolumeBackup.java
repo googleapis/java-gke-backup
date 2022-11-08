@@ -16,30 +16,38 @@
 
 package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.BackupForGKESettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_async]
+import com.google.api.core.ApiFuture;
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.GetVolumeBackupRequest;
+import com.google.cloud.gkebackup.v1.VolumeBackup;
+import com.google.cloud.gkebackup.v1.VolumeBackupName;
 
-public class SyncGetBackupPlan {
+public class AsyncGetVolumeBackup {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    asyncGetVolumeBackup();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void asyncGetVolumeBackup() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKESettings.Builder backupForGKESettingsBuilder = BackupForGKESettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKESettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      GetVolumeBackupRequest request =
+          GetVolumeBackupRequest.newBuilder()
+              .setName(
+                  VolumeBackupName.of(
+                          "[PROJECT]", "[LOCATION]", "[BACKUP_PLAN]", "[BACKUP]", "[VOLUME_BACKUP]")
+                      .toString())
+              .build();
+      ApiFuture<VolumeBackup> future =
+          backupForGKEClient.getVolumeBackupCallable().futureCall(request);
+      // Do something.
+      VolumeBackup response = future.get();
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_async]

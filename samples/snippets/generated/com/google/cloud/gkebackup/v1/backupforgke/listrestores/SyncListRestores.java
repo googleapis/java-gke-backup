@@ -16,30 +16,37 @@
 
 package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.BackupForGKESettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_ListRestores_sync]
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.ListRestoresRequest;
+import com.google.cloud.gkebackup.v1.Restore;
+import com.google.cloud.gkebackup.v1.RestorePlanName;
 
-public class SyncGetBackupPlan {
+public class SyncListRestores {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    syncListRestores();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void syncListRestores() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKESettings.Builder backupForGKESettingsBuilder = BackupForGKESettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKESettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      ListRestoresRequest request =
+          ListRestoresRequest.newBuilder()
+              .setParent(RestorePlanName.of("[PROJECT]", "[LOCATION]", "[RESTORE_PLAN]").toString())
+              .setPageSize(883849137)
+              .setPageToken("pageToken873572522")
+              .setFilter("filter-1274492040")
+              .setOrderBy("orderBy-1207110587")
+              .build();
+      for (Restore element : backupForGKEClient.listRestores(request).iterateAll()) {
+        // doThingsWith(element);
+      }
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_ListRestores_sync]

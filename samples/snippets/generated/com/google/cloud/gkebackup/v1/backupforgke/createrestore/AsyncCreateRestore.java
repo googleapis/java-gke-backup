@@ -16,30 +16,37 @@
 
 package com.google.cloud.gkebackup.v1.samples;
 
-// [START gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
-import com.google.cloud.gkebackup.v1.BackupForGKESettings;
-import java.time.Duration;
+// [START gkebackup_v1_generated_BackupForGKE_CreateRestore_async]
+import com.google.api.core.ApiFuture;
+import com.google.cloud.gkebackup.v1.BackupForGKEClient;
+import com.google.cloud.gkebackup.v1.CreateRestoreRequest;
+import com.google.cloud.gkebackup.v1.Restore;
+import com.google.cloud.gkebackup.v1.RestorePlanName;
+import com.google.longrunning.Operation;
 
-public class SyncGetBackupPlan {
+public class AsyncCreateRestore {
 
   public static void main(String[] args) throws Exception {
-    syncGetBackupPlan();
+    asyncCreateRestore();
   }
 
-  public static void syncGetBackupPlan() throws Exception {
+  public static void asyncCreateRestore() throws Exception {
     // This snippet has been automatically generated and should be regarded as a code template only.
     // It will require modifications to work:
     // - It may require correct/in-range values for request initialization.
     // - It may require specifying regional endpoints when creating the service client as shown in
     // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    BackupForGKESettings.Builder backupForGKESettingsBuilder = BackupForGKESettings.newBuilder();
-    backupForGKESettingsBuilder
-        .getBackupPlanSettings()
-        .setRetrySettings(
-            backupForGKESettingsBuilder.getBackupPlanSettings().getRetrySettings().toBuilder()
-                .setTotalTimeout(Duration.ofSeconds(30))
-                .build());
-    BackupForGKESettings backupForGKESettings = backupForGKESettingsBuilder.build();
+    try (BackupForGKEClient backupForGKEClient = BackupForGKEClient.create()) {
+      CreateRestoreRequest request =
+          CreateRestoreRequest.newBuilder()
+              .setParent(RestorePlanName.of("[PROJECT]", "[LOCATION]", "[RESTORE_PLAN]").toString())
+              .setRestore(Restore.newBuilder().build())
+              .setRestoreId("restoreId-1845465015")
+              .build();
+      ApiFuture<Operation> future = backupForGKEClient.createRestoreCallable().futureCall(request);
+      // Do something.
+      Operation response = future.get();
+    }
   }
 }
-// [END gkebackup_v1_generated_BackupForGKESettings_GetBackupPlan_sync]
+// [END gkebackup_v1_generated_BackupForGKE_CreateRestore_async]
